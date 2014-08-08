@@ -1,0 +1,66 @@
+Rough order of priority
+
+1. SOLVED
+	Figure out multi-tone - the frequencies don't line up? Or that's just mad aliasing. Or both - SOLVED(Sorta)
+	Seems to be that we only fill half the buffer - SOLVED
+Solution:
+	Seems to be mix of me not knowing what fifths sound like, and trying to use non integer frequencies.
+Remarks:
+	Why didn't my method work damnit?
+	also some sounds still sound bad? Sounds better
+
+2. SOLVED
+	Figure why there's input lag
+	The note needs to force the synth to update?
+	There's about a half second lag
+	Affected by logic update interval of justsynth? NOPE
+	It's not related to the buffer – the sampleData array changes pretty much instantly after KeyOn comes on
+Solution:
+	set BufferSize in auline.open()
+Remarks:
+	Internet is great
+
+3. SOLVED
+	if you change noteon or noteoff in the middle of a single buffer, I think it doesn't respond and the note sticks.
+	There's a harsh sound when you join a note with another? Only if you do it too soon after.
+	Is it from the fade? Yeah the beats are really intense. I think it's in the decay. Def in decay, or transition from attack to decay.
+	Is it the sudden twist? Need algorithm for smoother transition? Exponential instead of linear:
+		see http://www.cchrispeters.com/Images/EnvelopeGenerator.gif
+Solution: Multiply the samples by Short.MAX_VALUE/2 instead of the full. When you added them in mixer, you were going over the top of
+	the size limit of the 16 bit integer, so make them all smaller.
+Remarks: This lets you start chords, but there's still the problem of sticking
+
+3.5
+	the problem of sticking
+	the envelopegenerator gets stuck in sustain – check the count
+	Well I put a noteOff[noteDex] = false from one if to another, to eliminate redundancy. Did this do anything? NOPE\
+Solution:
+Remarks:
+
+
+4.
+	Add volume controls for mix? Higher pitched are louder, so need to be scaled down? Equalizer
+Solution:
+Remarks:
+
+5. Sustain pedal feature (spacebar)
+
+2.5ish
+	Then add features:
+	2 Octaves A to A DONE
+	Equal Tempered – DONE
+	and Dynamic Just Retuning
+		Different Just Diatonics (It'll be easy once you get one down)
+			7 Limit super pure – DONE
+			Pythagorean
+	So the aug 4/ dim 5 always has this sort of disconnected doubling
+			
+	Graphics – DONE
+	Instructions (Help Screen, separate state?)
+	Intro Screen - DONE
+	
+	info on screen:
+	current tuning state – DONE
+	generate the table – DONE
+	
+	Maybe have non-12 note scales – UNLIKELY
