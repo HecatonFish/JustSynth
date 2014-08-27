@@ -8,7 +8,7 @@ Download the executable and run it. This program requires Java to be installed.
 
 |Key:					|	Effect
 |---------------------------------------|----------------------------------------------------------
-|1-BACKSPACE and TAB–\			|	Play Notes
+|1–BACKSPACE and TAB–\			|	Play Notes
 |A–ENTER				|	Retune the Keyboard to a Note
 |Z					|	Select Equal Tempered Tuning
 |X					|	Select Just Tuning (7 Limit)
